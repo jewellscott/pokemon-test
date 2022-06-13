@@ -49,9 +49,9 @@ useEffect(() => {
   }
   
 
-  // const movesList = pokemon.moves.map((move, i) => (
-  //   <li key={i}>{move}</li>
-  // ));
+  const movesList = pokemon.moves.map((move, j) => (
+    <li key={j}>{move.name}</li>
+  ));
  
   return (
     <div className="App">
@@ -71,14 +71,14 @@ useEffect(() => {
       </header>
       <main>
       <div className="poke-card">
-        {/* <div className="left">
+        <div className="left">
            <img className="poke-img" src={pokemon.sprites.front_default} alt={pokemon.name}/>
           <h2 className="poke-name">{pokemon.name}</h2>
-        </div> */}
+        </div> 
         <div className="right">
           <h2>Moves</h2>
           <ul>
-            {/* {movesList} */}
+            {movesList}
           </ul>
         </div>
         </div>
