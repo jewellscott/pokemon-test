@@ -10,8 +10,8 @@ const [ pokemon, setPokemon ] = useState('null')
 const [ loading, setLoading ] = useState(true);
 const [ error, setError ] = useState(null);
 
-const [ formEntry, setFormEntry ] = useState('');
-const [ pokemonSelection, setPokemonSelection ] = useState('')
+const [ formEntry, setFormEntry ] = useState('pikachu');
+const [ pokemonSelection, setPokemonSelection ] = useState('pikachu')
 
 
 useEffect(() => {
@@ -21,7 +21,7 @@ useEffect(() => {
 
        if (!res.ok) { // handles error for wrong/nonexistent endpoints
          throw new Error(
-           `This is an HTTP error: The status is ${res.status}`
+           `Not a valid Pokémon! Try again. This is an HTTP error: The status is ${res.status}`
          );
        }
        
@@ -44,9 +44,9 @@ useEffect(() => {
   }
 
   // const movesList = pokemon.moves.map((move, i) => (
-  //   <li key={i}>{move.name}</li>
+  //   <li key={i}>{move}</li>
   // ));
-
+ 
   return (
     <div className="App">
       <header>
@@ -54,7 +54,7 @@ useEffect(() => {
         <p>Find any Pokémon and its moves!</p>
         <form onSubmit={handleSubmit}>
           <input type="text" value={formEntry} onChange={(e) => setFormEntry(e.target.value)}/>
-          <input type="submit" value="Get my Pokémon!"/>
+          <input className="submit" type="submit" value="Get my Pokémon!"/>
         </form>
         {loading && <p>Loading...</p>}
         {error && (
@@ -64,13 +64,18 @@ useEffect(() => {
        )}
       </header>
       <main>
-        {/* <div className="pokemon-card">
-          <img src={pokemon.sprites.front_default} alt={pokemon}/>
-          <h3>{pokemon.name}</h3>
+      <div className="poke-card">
+        <div className="left">
+           <img className="poke-img" src={pokemon.sprites.front_default} alt={pokemon.name}/>
+          <h2 className="poke-name">{pokemon.name}</h2>
+        </div>
+        <div className="right">
+          <h2>Moves</h2>
           <ul>
-            {movesList}
+            {/* {movesList} */}
           </ul>
-        </div> */}
+        </div>
+        </div>
       </main>
     </div>
   );
