@@ -11,13 +11,15 @@ const [ loading, setLoading ] = useState(true);
 const [ error, setError ] = useState(null);
 
 const [ formEntry, setFormEntry ] = useState('pikachu');
-const [ pokemonSelection, setPokemonSelection ] = useState('pikachu')
+
+// issue is with this 
+const [ pokemonName, setPokemonName ] = useState('pikachu')
 
 
 useEffect(() => {
   const getPokemon = async () => { // fetch data with error handling
     try {
-       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonSelection}`);
+       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
 
        if (!res.ok) { // handles error for wrong/nonexistent endpoints
          throw new Error(
@@ -36,12 +38,16 @@ useEffect(() => {
     }
   }
   getPokemon();
-}, [pokemonSelection]);
+}, [pokemonName]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPokemonSelection(formEntry);
+    setPokemonName(formEntry);
+    console.log(formEntry);
+    console.log(pokemonName);
+    console.log(pokemon);
   }
+  
 
   // const movesList = pokemon.moves.map((move, i) => (
   //   <li key={i}>{move}</li>
