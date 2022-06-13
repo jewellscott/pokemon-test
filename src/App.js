@@ -6,16 +6,18 @@ function App() {
 
 // manage state
 
-const [pokemon, setPokemon ] = useState([null]);
-const [loading, setLoading] = useState(true);
-const [error, setError] = useState(null);
+const [ pokemon, setPokemon ] = useState('null')
+const [ loading, setLoading ] = useState(true);
+const [ error, setError ] = useState(null);
 
-const [formEntry, setFormEntry] = useState('pikachu');
+const [ formEntry, setFormEntry ] = useState('');
+const [ pokemonSelection, setPokemonSelection ] = useState('')
+
 
 useEffect(() => {
   const getPokemon = async () => { // fetch data with error handling
     try {
-       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${formEntry}`);
+       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonSelection}`);
 
        if (!res.ok) { // handles error for wrong/nonexistent endpoints
          throw new Error(
@@ -34,14 +36,16 @@ useEffect(() => {
     }
   }
   getPokemon();
-}, []);
-
+}, [pokemonSelection]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formEntry);
-    console.log(pokemon);
+    setPokemonSelection(formEntry);
   }
+
+  // const movesList = pokemon.moves.map((move, i) => (
+  //   <li key={i}>{move.name}</li>
+  // ));
 
   return (
     <div className="App">
@@ -49,7 +53,7 @@ useEffect(() => {
         <h1>Pokédex</h1>
         <p>Find any Pokémon and its moves!</p>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={formEntry} onInput={(e) => setFormEntry(e.target.value)}/>
+          <input type="text" value={formEntry} onChange={(e) => setFormEntry(e.target.value)}/>
           <input type="submit" value="Get my Pokémon!"/>
         </form>
         {loading && <p>Loading...</p>}
@@ -60,9 +64,13 @@ useEffect(() => {
        )}
       </header>
       <main>
-        <div className="pokemon-card">
-
-        </div>
+        {/* <div className="pokemon-card">
+          <img src={pokemon.sprites.front_default} alt={pokemon}/>
+          <h3>{pokemon.name}</h3>
+          <ul>
+            {movesList}
+          </ul>
+        </div> */}
       </main>
     </div>
   );
