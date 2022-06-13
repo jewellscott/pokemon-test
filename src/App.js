@@ -65,10 +65,10 @@ useEffect(() => {
       </header>
       <main>
       <div className="poke-card">
-        <div className="left">
+        {/* <div className="left">
            <img className="poke-img" src={pokemon.sprites.front_default} alt={pokemon.name}/>
           <h2 className="poke-name">{pokemon.name}</h2>
-        </div>
+        </div> */}
         <div className="right">
           <h2>Moves</h2>
           <ul>
