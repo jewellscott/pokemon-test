@@ -29,6 +29,7 @@ useEffect(() => {
        
        let pokemonData = await res.json();
        setPokemon(pokemonData);
+       console.log(pokemon.moves);
        setError(null);
     } catch(err) { // handles network errors
       setError(err.message);
@@ -47,11 +48,10 @@ useEffect(() => {
     console.log(pokemonName);
     console.log(pokemon);
   }
-  
 
-  const movesList = pokemon.moves.map((move, j) => (
-    <li key={j}>{move.name}</li>
-  ));
+  // const movesList = pokemon.moves.map((move, j) => (
+  //   <li key={j}>{move.move.name}</li>
+  // ));
  
   return (
     <div className="App">
@@ -70,18 +70,18 @@ useEffect(() => {
        )}
       </header>
       <main>
-      <div className="poke-card">
+      {/* <div className="poke-card">
         <div className="left">
            <img className="poke-img" src={pokemon.sprites.front_default} alt={pokemon.name}/>
           <h2 className="poke-name">{pokemon.name}</h2>
         </div> 
         <div className="right">
           <h2>Moves</h2>
-          <ul>
+          <ul className='movesList'>
             {movesList}
           </ul>
         </div>
-        </div>
+        </div> */}
       </main>
     </div>
   );

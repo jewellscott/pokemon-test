@@ -25,16 +25,19 @@ header p {
 
 .poke-card {
   border: 10px solid black;
-  padding: 2rem;
-  max-width: 70em;
+  padding: 2rem 10rem;
+  max-width: 60vw;
   margin: 1rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .poke-img {
   width: 20rem;
   height: auto;
   padding: 0;
+  image-rendering: pixelated;
 }
 
 main {
@@ -47,17 +50,31 @@ h2 {
   font-size: 3rem;
   text-transform: uppercase;
   font-weight: 800;
+  text-align: center;
 }
 
 .right {
-  margin: auto 10rem;
+  display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.right h2 {
+  font-size: 2.5rem;
 }
 
 ul {
-  padding-left: 1rem;
-  text-align: left;
+  display: flex;
+  max-height: 90rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin-left: -10rem;
+}
+
+li {
+  font-size: .9rem;
+  padding: .5rem;
+  font-weight: bold;
 }
 
 input {
