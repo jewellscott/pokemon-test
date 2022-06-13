@@ -6,9 +6,11 @@ function App() {
 
 // manage state
 
-const [pokemon, setPokemon ] = useState(null);
+const [pokemon, setPokemon ] = useState([null]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
+
+const [formEntry, setFormEntry] = useState('Pikachu');
 
 useEffect(() => {
   const getPokemon = async () => { // fetch data with error handling
@@ -34,13 +36,27 @@ useEffect(() => {
   getPokemon();
 }, []);
 
+  const pokemonList = [pokemon].map((name, sprites) => (
+    <li key={name}>
+      <img src={sprites.front_default} alt=""></img>
+      <h3>{name}</h3>
+    </li>
+  ));
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formEntry);
+  }
 
   return (
     <div className="App">
       <header>
         <h1>Pokédex</h1>
         <p>Find any Pokémon and its moves!</p>
+        <form onSubmit={handleSubmit}>
+          <input type="text" onInput={(e) => setFormEntry(e.target.value)}/>
+          <input type="submit" value="Get my Pokémon!"/>
+        </form>
         {loading && <p>Loading...</p>}
         {error && (
           <div>
@@ -50,20 +66,7 @@ useEffect(() => {
       </header>
       <main>
         <ul>
-          {
-            Object.values(pokemon).map((name, sprites, moves, move, index) => {
-              return (
-                <li key={index}>
-                  <img src={sprites.front_default} alt="" />
-                  <h2>{name}</h2>
-                  <ul>
-                    {/* how to do nested maps? */}
-                    <li>{moves.move.name}</li>
-                  </ul>
-                </li>
-              )
-            })
-          }
+          {/* {pokemonList} */}
         </ul>
       </main>
     </div>
