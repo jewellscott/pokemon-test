@@ -10,12 +10,12 @@ const [pokemon, setPokemon ] = useState([null]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 
-const [formEntry, setFormEntry] = useState('Pikachu');
+const [formEntry, setFormEntry] = useState('pikachu');
 
 useEffect(() => {
   const getPokemon = async () => { // fetch data with error handling
     try {
-       const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
+       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${formEntry}`);
 
        if (!res.ok) { // handles error for wrong/nonexistent endpoints
          throw new Error(
@@ -36,16 +36,11 @@ useEffect(() => {
   getPokemon();
 }, []);
 
-  const pokemonList = [pokemon].map((name, sprites) => (
-    <li key={name}>
-      <img src={sprites.front_default} alt=""></img>
-      <h3>{name}</h3>
-    </li>
-  ));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formEntry);
+    console.log(pokemon);
   }
 
   return (
@@ -54,7 +49,7 @@ useEffect(() => {
         <h1>Pokédex</h1>
         <p>Find any Pokémon and its moves!</p>
         <form onSubmit={handleSubmit}>
-          <input type="text" onInput={(e) => setFormEntry(e.target.value)}/>
+          <input type="text" value={formEntry} onInput={(e) => setFormEntry(e.target.value)}/>
           <input type="submit" value="Get my Pokémon!"/>
         </form>
         {loading && <p>Loading...</p>}
@@ -65,9 +60,9 @@ useEffect(() => {
        )}
       </header>
       <main>
-        <ul>
-          {/* {pokemonList} */}
-        </ul>
+        <div className="pokemon-card">
+
+        </div>
       </main>
     </div>
   );
