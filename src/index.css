@@ -71,3 +71,8 @@ input {
   color: white;
   font-weight: 800;
 }
+
+.submit:active {
+  background-color: orchid;
+  border-color: orchid;
+}
